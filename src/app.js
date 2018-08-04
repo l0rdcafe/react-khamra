@@ -6,7 +6,7 @@ import Loading from "./loading";
 import Body from "./body";
 import Sidebar from "./sidebar";
 import VenueDetails from "./venue";
-import { CLIENT_ID, CLIENT_SECRET } from "./secrets";
+import getVenues from "./foursquare-api";
 
 class App extends React.Component {
   constructor(props) {
@@ -17,7 +17,8 @@ class App extends React.Component {
       radius: 10,
       zoom: 13,
       loading: true,
-      venues: "Please submit a radius to fetch venues"
+      venues: [],
+      isFetched: false
     };
   }
   componentDidMount() {
@@ -41,40 +42,13 @@ class App extends React.Component {
     const radius = e.target.value;
     this.setState({ radius });
   };
-  fetchVenues = () => {
+  fetchVenues = async () => {
     const { lon, lat, radius } = this.state;
-    const convertedRadius = radius * 1000;
-    const url = `https://api.foursquare.com/v2/venues/explore?client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}&ll=${lat},${lon}&radius=${convertedRadius}&section=drinks&v=20180707&limit=20`;
-
-    fetch(url)
-      .then(res => res.json())
-      .then(data => this.setVenues(data.response.groups[0].items))
-      .catch(err => err.message);
-  };
-  setVenues = items => {
-    const venues =
-      items.length > 0
-        ? items.map(item => {
-            const { id, name } = item.venue;
-            const { distance, formattedAddress, lat, lng } = item.venue.location;
-            const location = {
-              distance,
-              address: formattedAddress.join(" "),
-              lat,
-              lng
-            };
-            return {
-              id,
-              name,
-              location
-            };
-          })
-        : "No results found";
-
-    this.setState({ venues });
+    const venues = await getVenues(lat, lon, radius);
+    this.setState({ venues, isFetched: true });
   };
   render() {
-    const { radius, loading, lon, lat, error, zoom, venues } = this.state;
+    const { radius, loading, lon, lat, error, zoom, venues, isFetched } = this.state;
     return (
       <Router>
         <div>
@@ -91,25 +65,26 @@ class App extends React.Component {
           />
           <Route
             path="/map"
-            render={() => lon && lat && <Body lon={lon} radius={radius} lat={lat} zoom={zoom} venues={venues} />}
+            render={() =>
+              lon &&
+              lat && <Body lon={lon} radius={radius} lat={lat} zoom={zoom} venues={venues} isFetched={isFetched} />
+            }
           />
-          {Array.isArray(venues)
-            ? venues.map(venue => (
-                <Route
-                  path={`/venue/${venue.name
-                    .toLowerCase()
-                    .split(" ")
-                    .join("-")}`}
-                    key={`/venue/${venue.name.toLowerCase()}`}
-                  render={() => (
-                    <div className="body">
-                      <Sidebar venues={venues} />
-                      <VenueDetails venue={venue} />
-                    </div>
-                  )}
-                />
-              ))
-            : null}
+          {venues.map(venue => (
+            <Route
+              path={`/venue/${venue.name
+                .toLowerCase()
+                .split(" ")
+                .join("-")}`}
+              key={`/venue/${venue.name.toLowerCase()}`}
+              render={() => (
+                <div className="body">
+                  <Sidebar venues={venues} isFetched={isFetched} />
+                  <VenueDetails venue={venue} />
+                </div>
+              )}
+            />
+          ))}
         </div>
       </Router>
     );

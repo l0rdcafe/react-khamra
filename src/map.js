@@ -1,5 +1,6 @@
 import React from "react";
 import ReactMapGL, { Marker } from "react-map-gl";
+import { Link } from "react-router-dom";
 import { API_KEY } from "./secrets";
 
 class Map extends React.Component {
@@ -36,13 +37,19 @@ class Map extends React.Component {
           <Marker longitude={Number(lon)} latitude={Number(lat)}>
             <div className="dot" />
           </Marker>
-          {Array.isArray(venues) &&
-            venues.map(venue => (
-              <Marker longitude={Number(venue.location.lng)} latitude={Number(venue.location.lat)}>
+          {venues.map(venue => (
+            <Marker key={venue.name} longitude={Number(venue.location.lng)} latitude={Number(venue.location.lat)}>
+              <Link
+                to={`/venue/${venue.name
+                  .toLowerCase()
+                  .split(" ")
+                  .join("-")}`}
+              >
                 <div className="venue" />
-                <span className="venue__name">{venue.name}</span>
-              </Marker>
-            ))}
+              </Link>
+              <span className="venue__name">{venue.name}</span>
+            </Marker>
+          ))}
         </ReactMapGL>
       </div>
     );
