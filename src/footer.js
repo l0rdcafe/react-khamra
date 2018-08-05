@@ -1,9 +1,12 @@
 import React from "react";
+import { FormattedMessage } from "react-intl";
 
 const Footer = () => (
   <footer className="footer">
     <div className="footer__body">
-      <h4>Made by 👑 l0rdcafe 👑</h4>
+      <h4>
+        <FormattedMessage id="detail.footer" />
+      </h4>
       <ul className="footer__social">
         <li className="social__item">
           <a href="mailto:me@l0rdcafe.com">
