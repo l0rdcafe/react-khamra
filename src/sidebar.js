@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
+import { List, P } from "cc-ss-ui-kit";
 
 const Sidebar = ({ venues, isFetched }) => {
   const data =
@@ -21,7 +22,13 @@ const Sidebar = ({ venues, isFetched }) => {
     ) : (
       <FormattedMessage id="detail.sidebar" />
     );
-  return <ul className="sidebar">{isFetched ? data : <FormattedMessage id="detail.sidebarDefault" />}</ul>;
+  return (
+    <List className="sidebar">
+      <P align="center" style={!isFetched ? { paddingTop: "3%" } : null}>
+        {isFetched ? data : <FormattedMessage id="detail.sidebarDefault" />}
+      </P>
+    </List>
+  );
 };
 
 export default Sidebar;

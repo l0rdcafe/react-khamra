@@ -1,13 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { H1, H3 } from "cc-ss-ui-kit";
 
 const Venue = ({ venue }) => (
   <div className="details">
     <Link to="/map/venues">
       <i className="fas fa-arrow-left" />
     </Link>
-    <h1>{venue.name}</h1>
-    <h3>Address: {venue.location.address}</h3>
+    <H1>{venue.name}</H1>
+    <H3>Address: {venue.location.address}</H3>
   </div>
 );
 

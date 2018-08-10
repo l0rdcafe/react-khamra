@@ -12,6 +12,7 @@ addLocaleData([...en, ...ar]);
 
 const locale =
   (navigator.languages && navigator.languages[0]) || navigator.language || navigator.userLanguage || "en-US";
+console.log(locale);
 
 ReactDOM.render(
   <IntlProvider locale={locale} messages={flattenMessages(messages[locale])}>

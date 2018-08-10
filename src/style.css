@@ -1,5 +1,5 @@
 body {
-    background-color: cadetblue;
+    background-color: #fff;
     margin: 0;
     padding: 0;
 }
@@ -9,9 +9,8 @@ body {
     height: 5vh;
     display: flex;
     z-index: 999;
-    background-color: cadetblue;
-    box-shadow: 0 0 8px #3b6365;
-    border: 1px solid #3b6365;
+    background-color: #000;
+    box-shadow: 0 0 8px #aaa;
 }
 
 .nav input,
@@ -20,11 +19,11 @@ body {
 }
 
 .nav h1 {
-    color: #ffd700;
+    color: #fff;
     flex: 2.03;
     height: 100%;
     margin-top: 0;
-    border-right: 1px solid #3b6365;
+    border-right: 1px solid #fff;
 }
 
 .nav p {
@@ -34,7 +33,7 @@ body {
 
 .nav input {
     flex: 1.25;
-    border-left: 1px solid #3b6365;
+    border-left: 1px solid #fff;
     padding: 0;
     margin: 0;
 }
@@ -45,24 +44,21 @@ body {
 
 .nav button {
     width: 100%;
-    color: white;
-    background-color: #85144b;
-    border: 1px solid #85144b;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: background-color 0.25s;
+    border-radius: 0;
     font-family: Helvetica, sans-serif;
-    vertical-align: middle;
-    padding: 0;
     padding-top: 1%;
+    background: gold;
+    border: 1px solid gold;
 }
 
 .sidebar {
     overflow: hidden;
-    max-height: 81.5vh;
+    height: 83.8vh;
     overflow: scroll;
     padding: 0;
     list-style-type: none;
+    background: #000;
+    border-top: 1px solid #fff;
 }
 
 .sidebar a {
@@ -73,12 +69,8 @@ body {
 }
 
 .sidebar li {
-    border-bottom: 1px solid #3b6365;
-    padding: 2%;
-}
-
-.nav button:hover {
-    background-color: #6d113d;
+    border-bottom: 1px solid #fff;
+    padding: 0 2%;
 }
 
 .footer,

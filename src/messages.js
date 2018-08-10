@@ -9,6 +9,16 @@ export default {
       footer: "Made by 👑 l0rdcafe 👑"
     }
   },
+  en: {
+    detail: {
+      submit: "Submit",
+      title: "Khamra",
+      slider: "Select radius in {radius} km",
+      sidebarDefault: "Please submit a radius to fetch venues",
+      sidebar: "No results found",
+      footer: "Made by 👑 l0rdcafe 👑"
+    }
+  },
   ar: {
     detail: {
       submit: "سلم",
