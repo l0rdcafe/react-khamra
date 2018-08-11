@@ -48,8 +48,6 @@ body {
     border-radius: 0;
     font-family: Helvetica, sans-serif;
     padding-top: 1%;
-    background: gold;
-    border: 1px solid gold;
 }
 
 .sidebar {
@@ -64,9 +62,14 @@ body {
 
 .sidebar a {
     text-decoration: none;
-    color: gold;
+    color: #0074d9;
     margin: 0;
     padding: 0;
+    transition: opacity 0.25s;
+}
+
+.sidebar a:hover {
+    opacity: 0.6;
 }
 
 .sidebar li {
@@ -174,13 +177,6 @@ footer {
     border-radius: 50%;
     animation: pulse 1s infinite;
     transition: all 0.2s;
-}
-
-.venue {
-    height: 12px;
-    width: 18px;
-    background: gold;
-    border: 1px solid goldenrod;
 }
 
 .venue__name {

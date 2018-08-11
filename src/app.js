@@ -18,7 +18,8 @@ class App extends React.Component {
       zoom: 13,
       loading: true,
       venues: [],
-      isFetched: false
+      isFetched: false,
+      transitionIn: false
     };
   }
   componentDidMount() {
@@ -45,10 +46,10 @@ class App extends React.Component {
   fetchVenues = async () => {
     const { lon, lat, radius } = this.state;
     const venues = await getVenues(lat, lon, radius);
-    this.setState({ venues, isFetched: true });
+    this.setState({ venues, isFetched: true, transitionIn: true });
   };
   render() {
-    const { radius, loading, lon, lat, error, zoom, venues, isFetched } = this.state;
+    const { radius, loading, lon, lat, error, zoom, venues, isFetched, transitionIn } = this.state;
     return (
       <Router>
         <div>
@@ -67,7 +68,17 @@ class App extends React.Component {
             path="/map"
             render={() =>
               lon &&
-              lat && <Body lon={lon} radius={radius} lat={lat} zoom={zoom} venues={venues} isFetched={isFetched} />
+              lat && (
+                <Body
+                  lon={lon}
+                  radius={radius}
+                  lat={lat}
+                  zoom={zoom}
+                  venues={venues}
+                  isFetched={isFetched}
+                  inProp={transitionIn}
+                />
+              )
             }
           />
           {venues.map(venue => (
@@ -79,7 +90,7 @@ class App extends React.Component {
               key={`/venue/${venue.name.toLowerCase()}`}
               render={() => (
                 <div className="body">
-                  <Sidebar venues={venues} isFetched={isFetched} />
+                  <Sidebar venues={venues} isFetched={isFetched} inProp={transitionIn} />
                   <VenueDetails venue={venue} />
                 </div>
               )}
