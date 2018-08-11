@@ -8,7 +8,7 @@ const Nav = ({ handleRadius, radius, fetchVenues }) => (
     <h1>
       <FormattedMessage id="detail.title" />
     </h1>
-    <P align="center">
+    <P align="center" primary>
       <FormattedMessage id="detail.slider" values={{ radius }} />
     </P>
     <input id="radius" min="1" max="30" list="tickmarks" defaultValue={radius} type="range" onInput={handleRadius} />

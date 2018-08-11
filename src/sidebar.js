@@ -24,7 +24,7 @@ const Sidebar = ({ venues, isFetched }) => {
     );
   return (
     <List className="sidebar">
-      <P align="center" style={!isFetched ? { paddingTop: "3%" } : null}>
+      <P primary align="center" style={!isFetched ? { paddingTop: "3%" } : null}>
         {isFetched ? data : <FormattedMessage id="detail.sidebarDefault" />}
       </P>
     </List>
